@@ -1,4 +1,4 @@
-# PetCare Connect 🐾
+# PetCare Connect 
 
 A full-stack Flutter + Node.js mobile application for discovering, comparing, and booking pet-care services (vets, groomers, walkers, boarding, trainers) — built as a practice project modeled on real-world pet-care marketplace apps.
 
