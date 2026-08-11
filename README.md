@@ -50,68 +50,6 @@ petcare-connect/
     └── pubspec.yaml
 ```
 
-## Backend Setup
-
-### 1. Prerequisites
-- Node.js (v18+)
-- A MongoDB database — easiest option is a free [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cluster (no local install needed)
-
-### 2. Install & configure
-```bash
-cd backend
-npm install
-cp .env.example .env
-```
-Open `.env` and fill in:
-```
-PORT=5000
-MONGO_URI=your_mongodb_atlas_connection_string
-JWT_SECRET=any_long_random_string
-```
-
-### 3. Run the server
-```bash
-npm run dev
-```
-Server starts at `http://localhost:5000`. You should see `MongoDB connected` and `Server running on port 5000`.
-
-### 4. Seed demo data (important — run this once)
-The app needs some providers to display. Hit this endpoint once (via browser, Postman, or curl) after the server is running:
-```bash
-curl -X POST http://localhost:5000/api/providers/seed/demo
-```
-This populates 3 demo providers (a vet, a groomer, and a dog walker) with sample slots.
-
-### 5. Deploying the backend for free (recommended if using FlutLab)
-Since FlutLab only runs Flutter code (not Node.js), deploy the backend somewhere public so your Flutter app can reach it from FlutLab or any device:
-- **[Render.com](https://render.com)** — free tier, connect your GitHub repo, set the same env vars, deploy
-- **[Railway.app](https://railway.app)** — similar free-tier flow
-
-Once deployed, note your live URL (e.g. `https://petcare-connect-backend.onrender.com`).
-
-## Frontend Setup
-
-### Option A — Run locally (needs a decent machine)
-```bash
-cd frontend
-flutter pub get
-flutter run
-```
-By default the app points to `http://10.0.2.2:5000/api` (the Android emulator's alias for your laptop's localhost). If testing on a **real device**, change this in `lib/services/api_service.dart`:
-```dart
-static const String baseUrl = 'http://YOUR_LAPTOP_IP:5000/api';
-```
-
-### Option B — Run on FlutLab (recommended if Flutter hangs your laptop)
-1. Go to [flutlab.io](https://flutlab.io) and create a free account.
-2. Create a new Flutter project.
-3. Upload/paste the contents of `frontend/pubspec.yaml` and everything under `frontend/lib/` into the corresponding files in FlutLab's file tree (recreate the same folder structure: `lib/models`, `lib/screens`, `lib/services`).
-4. In `lib/services/api_service.dart`, update `baseUrl` to your **deployed** backend URL (see step 5 above) — FlutLab runs in the cloud and can't reach `localhost` on your laptop:
-   ```dart
-   static const String baseUrl = 'https://your-deployed-backend.onrender.com/api';
-   ```
-5. Click **Run** in FlutLab — it builds and streams a live emulator preview in your browser. No load on your laptop at all.
-
 ### Test login
 Register a new account from the app's Sign Up screen, or hit the API directly:
 ```bash
