@@ -1,0 +1,13 @@
+# Node
+backend/node_modules/
+backend/.env
+backend/npm-debug.log
+
+# Flutter
+frontend/.dart_tool/
+frontend/.packages
+frontend/build/
+frontend/android/.gradle/
+frontend/ios/Pods/
+frontend/*.iml
+frontend/.idea/
